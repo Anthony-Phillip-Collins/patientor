@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import { apiBaseUrl } from '../constants';
-import { Diagnosis } from '../types/Diagnosis';
+import { Diagnosis } from '@patientor/shared/types';
 
 const getAll = async () => {
   const { data } = await axios.get<Diagnosis[]>(`${apiBaseUrl}/diagnoses`);

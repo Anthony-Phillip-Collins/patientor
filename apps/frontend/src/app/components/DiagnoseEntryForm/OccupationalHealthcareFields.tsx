@@ -1,11 +1,11 @@
-import { Grid, TextField, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
-import { OccupationalHealthcareEntry } from "../../types/Diagnosis";
+import { Grid, TextField, Typography } from '@mui/material';
+import { OccupationalHealthcareEntry } from '@patientor/shared/types';
+import { useEffect, useState } from 'react';
 
 interface Props {
-  employerName: OccupationalHealthcareEntry["employerName"];
-  setEmployer(employerName: OccupationalHealthcareEntry["employerName"]): void;
-  sickLeave: OccupationalHealthcareEntry["sickLeave"];
+  employerName: OccupationalHealthcareEntry['employerName'];
+  setEmployer(employerName: OccupationalHealthcareEntry['employerName']): void;
+  sickLeave: OccupationalHealthcareEntry['sickLeave'];
   setSickLeave(startDate: string, endDate: string): void;
   validate: boolean;
 }
@@ -17,8 +17,12 @@ const OccupationalHealthcareFields = ({
   setSickLeave,
   validate,
 }: Props) => {
-  const [sickLeaveStartDate, setSickLeaveStartDate] = useState<string>(sickLeave?.startDate || "");
-  const [sickLeaveEndDate, setSickLeaveEndDate] = useState<string>(sickLeave?.endDate || "");
+  const [sickLeaveStartDate, setSickLeaveStartDate] = useState<string>(
+    sickLeave?.startDate || ''
+  );
+  const [sickLeaveEndDate, setSickLeaveEndDate] = useState<string>(
+    sickLeave?.endDate || ''
+  );
 
   useEffect(() => {
     setSickLeave(sickLeaveStartDate, sickLeaveEndDate);
@@ -47,7 +51,7 @@ const OccupationalHealthcareFields = ({
           setEmployer(e.target.value);
         }}
         value={employerName}
-        error={validate && employerName === ""}
+        error={validate && employerName === ''}
         // helperText={(validate && employerName === "" && "Incorrect entry.") || ""}
       />
 
@@ -66,7 +70,11 @@ const OccupationalHealthcareFields = ({
             inputProps={{ max: sickLeaveEndDate }}
             onChange={(e) => setSickLeaveStartDate(e.target.value)}
             value={sickLeaveStartDate}
-            error={validate && !Date.parse(sickLeaveStartDate) && !!Date.parse(sickLeaveEndDate)}
+            error={
+              validate &&
+              !Date.parse(sickLeaveStartDate) &&
+              !!Date.parse(sickLeaveEndDate)
+            }
             fullWidth
           />
         </Grid>
@@ -80,7 +88,11 @@ const OccupationalHealthcareFields = ({
             inputProps={{ min: sickLeaveStartDate }}
             onChange={(e) => setSickLeaveEndDate(e.target.value)}
             value={sickLeaveEndDate}
-            error={validate && !Date.parse(sickLeaveEndDate) && !!Date.parse(sickLeaveStartDate)}
+            error={
+              validate &&
+              !Date.parse(sickLeaveEndDate) &&
+              !!Date.parse(sickLeaveStartDate)
+            }
             fullWidth
           />
         </Grid>

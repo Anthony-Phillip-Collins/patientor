@@ -1,15 +1,24 @@
-import { useContext, useState } from "react";
-import { Box, Table, Button, TableHead, Typography, TableCell, TableRow, TableBody } from "@mui/material";
-import axios from "axios";
+import { useContext, useState } from 'react';
+import {
+  Box,
+  Table,
+  Button,
+  TableHead,
+  Typography,
+  TableCell,
+  TableRow,
+  TableBody,
+} from '@mui/material';
+import axios from 'axios';
 
-import AddPatientModal from "../../components/AddPatientModal";
+import AddPatientModal from '../../components/AddPatientModal';
 
-import HealthRatingBar from "../../components/HealthRatingBar";
+import HealthRatingBar from '../../components/HealthRatingBar';
 
-import patientService from "../../services/patientServices";
-import { Link } from "react-router-dom";
-import { Patient, PatientFormValues } from "../../types/Patient";
-import { AppContext, AppContextValue } from "../../App";
+import patientService from '../../services/patientServices';
+import { Link } from 'react-router-dom';
+import { AppContext, AppContextValue } from '../../App';
+import { Patient, PatientFormValues } from '@patientor/shared/types';
 
 const PatientListPage = () => {
   const appContext: AppContextValue | null = useContext(AppContext);
@@ -31,16 +40,19 @@ const PatientListPage = () => {
       setModalOpen(false);
     } catch (e: unknown) {
       if (axios.isAxiosError(e)) {
-        if (e?.response?.data && typeof e?.response?.data === "string") {
-          const message = e.response.data.replace("Something went wrong. Error: ", "");
+        if (e?.response?.data && typeof e?.response?.data === 'string') {
+          const message = e.response.data.replace(
+            'Something went wrong. Error: ',
+            ''
+          );
           console.error(message);
           setError(message);
         } else {
-          setError("Unrecognized axios error");
+          setError('Unrecognized axios error');
         }
       } else {
-        console.error("Unknown error", e);
-        setError("Unknown error");
+        console.error('Unknown error', e);
+        setError('Unknown error');
       }
     }
   };
@@ -52,7 +64,7 @@ const PatientListPage = () => {
           Patient list
         </Typography>
       </Box>
-      <Table style={{ marginBottom: "1em" }}>
+      <Table style={{ marginBottom: '1em' }}>
         <TableHead>
           <TableRow>
             <TableCell>Name</TableCell>
@@ -76,7 +88,12 @@ const PatientListPage = () => {
           ))}
         </TableBody>
       </Table>
-      <AddPatientModal modalOpen={modalOpen} onSubmit={submitNewPatient} error={error} onClose={closeModal} />
+      <AddPatientModal
+        modalOpen={modalOpen}
+        onSubmit={submitNewPatient}
+        error={error}
+        onClose={closeModal}
+      />
       <Button variant="contained" onClick={() => openModal()}>
         Add New Patient
       </Button>

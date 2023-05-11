@@ -8,8 +8,7 @@ import { Link, useParams } from 'react-router-dom';
 import DiagnosisEntry from '../../components/DiagnoseEntry';
 import DiagnoseEntryForm, { Ref } from '../../components/DiagnoseEntryForm';
 import patientServices from '../../services/patientServices';
-import { NewDiagnosisEntry } from '../../types/Diagnosis';
-import { Patient } from '../../types/Patient';
+import { NewDiagnosisEntry, Patient } from '@patientor/shared/types';
 
 interface GenderIconProps {
   gender: 'male' | 'female' | 'other';

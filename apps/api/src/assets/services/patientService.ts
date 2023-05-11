@@ -1,7 +1,12 @@
 import { v4 as uuidv4 } from 'uuid';
 import patientsData from '../data/patientsData';
-import { DiagnosisEntry, NewDiagnosisEntry } from '../types/Diagnosis';
-import { NewPatient, Patient, PatientNonSensitive } from '../types/Patient';
+import {
+  DiagnosisEntry,
+  NewDiagnosisEntry,
+  NewPatient,
+  Patient,
+  PatientNonSensitive,
+} from '@patientor/shared/types';
 
 const getPatients = (): Patient[] => {
   patientsData.forEach((p) => {

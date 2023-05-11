@@ -1,4 +1,4 @@
-import { Diagnosis } from '../types/Diagnosis';
+import { Diagnosis } from '@patientor/shared/types';
 
 const diagnosesData: Diagnosis[] = [
   {

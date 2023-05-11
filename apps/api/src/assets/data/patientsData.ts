@@ -1,5 +1,4 @@
-import { Gender } from '../types/enums/Gender';
-import { Patient } from '../types/Patient';
+import { Gender, Patient } from '@patientor/shared/types';
 
 const patients: Patient[] = [
   {

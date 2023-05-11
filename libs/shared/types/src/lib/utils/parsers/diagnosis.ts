@@ -6,7 +6,7 @@ import {
   NewDiagnosisEntryBase,
   SickLeave,
 } from '../../Diagnosis';
-import assertNever from '../assertNever';
+import { assertNever } from '../assertNever';
 import { parseDate } from './date';
 import { compareObjectShapes } from './object';
 import { parseString } from './string';

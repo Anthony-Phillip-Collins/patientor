@@ -1,6 +1,6 @@
 import { Router, Request, Response } from 'express';
 import diagnosesData from '../data/diagnosesData';
-import { Diagnosis } from '../types/Diagnosis';
+import { Diagnosis } from '@patientor/shared/types';
 
 export const diagnosesRouter = Router();
 

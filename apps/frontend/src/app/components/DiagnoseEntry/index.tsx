@@ -1,16 +1,16 @@
-import { ReactElement, useContext } from "react";
-import { AppContext, AppContextValue } from "../../App";
-import HealthRatingIcon from "@mui/icons-material/Favorite";
-import HospitalIcon from "@mui/icons-material/LocalHospital";
-import WorkIcon from "@mui/icons-material/Work";
-import HealthCheckIcon from "@mui/icons-material/MonitorHeart";
+import { ReactElement, useContext } from 'react';
+import { AppContext, AppContextValue } from '../../App';
+import HealthRatingIcon from '@mui/icons-material/Favorite';
+import HospitalIcon from '@mui/icons-material/LocalHospital';
+import WorkIcon from '@mui/icons-material/Work';
+import HealthCheckIcon from '@mui/icons-material/MonitorHeart';
 import {
   DiagnosisEntry as IDiagnosisEntry,
   DiagnosisEntryBase as IDiagnosisEntryBase,
-} from "../../types/Diagnosis";
+  assertNever,
+} from '@patientor/shared/types';
 
-import styles from "./styles.module.css";
-import assertNever from "../../types/utils/assertNever";
+import styles from './styles.module.css';
 
 interface Props {
   entry: IDiagnosisEntry;
@@ -47,7 +47,7 @@ const DiagnosisEntryBase = ({
           ))}
         </ul>
       )}
-      <>{children}</>
+      {children}
       <span>Diagnosis by {specialist}</span>
     </div>
   );
@@ -56,14 +56,16 @@ const DiagnosisEntryBase = ({
 const DiagnosisEntry = ({ entry }: Props) => {
   try {
     switch (entry.type) {
-      case "HealthCheck":
+      case 'HealthCheck':
         return (
           <DiagnosisEntryBase baseProps={entry} themeIcon={<HealthCheckIcon />}>
-            <HealthRatingIcon className={styles[`healthRatingIcon${entry.healthCheckRating}`]} />
+            <HealthRatingIcon
+              className={styles[`healthRatingIcon${entry.healthCheckRating}`]}
+            />
           </DiagnosisEntryBase>
         );
         break;
-      case "Hospital":
+      case 'Hospital':
         return (
           <DiagnosisEntryBase baseProps={entry} themeIcon={<HospitalIcon />}>
             <span>
@@ -72,14 +74,15 @@ const DiagnosisEntry = ({ entry }: Props) => {
           </DiagnosisEntryBase>
         );
         break;
-      case "OccupationalHealthcare":
+      case 'OccupationalHealthcare':
         return (
           <DiagnosisEntryBase baseProps={entry} themeIcon={<WorkIcon />}>
             <>
               <div>employer: {entry.employerName}</div>
               {entry.sickLeave && (
                 <div>
-                  Sickleave: {entry.sickLeave.startDate} - {entry.sickLeave.endDate}
+                  Sickleave: {entry.sickLeave.startDate} -{' '}
+                  {entry.sickLeave.endDate}
                 </div>
               )}
             </>

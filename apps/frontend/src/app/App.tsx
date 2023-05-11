@@ -12,8 +12,7 @@ import PatientListPage from './pages/PatientListPage';
 import PatientPage from './pages/PatientPage';
 import diagnosisService from './services/diagnosisService';
 import patientService from './services/patientServices';
-import { Diagnosis } from './types/Diagnosis';
-import { Patient } from './types/Patient';
+import { Diagnosis, Patient } from '@patientor/shared/types';
 
 export interface AppContextValue {
   patients: Patient[];

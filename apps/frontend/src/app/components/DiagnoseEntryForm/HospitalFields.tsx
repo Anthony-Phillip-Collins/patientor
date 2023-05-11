@@ -1,9 +1,9 @@
-import { TextField, Typography } from "@mui/material";
-import { HospitalEntry } from "../../types/Diagnosis";
+import { TextField, Typography } from '@mui/material';
+import { HospitalEntry } from '@patientor/shared/types';
 
 interface Props {
-  discharge: HospitalEntry["discharge"];
-  setDischarge(discharge: HospitalEntry["discharge"]): void;
+  discharge: HospitalEntry['discharge'];
+  setDischarge(discharge: HospitalEntry['discharge']): void;
   validate: boolean;
 }
 
@@ -24,7 +24,7 @@ const HospitalFields = ({ discharge, setDischarge, validate }: Props) => {
           setDischarge({ ...discharge, criteria: e.target.value });
         }}
         value={discharge.criteria}
-        error={validate && discharge.criteria === ""}
+        error={validate && discharge.criteria === ''}
         // helperText={(validate && discharge.criteria === "" && "Incorrect entry.") || ""}
       />
 
@@ -38,7 +38,7 @@ const HospitalFields = ({ discharge, setDischarge, validate }: Props) => {
           setDischarge({ ...discharge, date: e.target.value });
         }}
         value={discharge.date}
-        error={validate && discharge.date === ""}
+        error={validate && discharge.date === ''}
         fullWidth
       />
     </>

@@ -4,10 +4,10 @@ import {
   DialogContent,
   Divider,
   Alert,
-} from "@mui/material";
-import { PatientFormValues } from "../../types/Patient";
+} from '@mui/material';
 
-import AddPatientForm from "./AddPatientForm";
+import AddPatientForm from './AddPatientForm';
+import { PatientFormValues } from '@patientor/shared/types';
 
 interface Props {
   modalOpen: boolean;

@@ -1,8 +1,13 @@
-import axios from "axios";
+import axios from 'axios';
 
-import { apiBaseUrl } from "../constants";
-import { DiagnosisEntry, NewDiagnosisEntry } from "../types/Diagnosis";
-import { Patient, PatientFormValues } from "../types/Patient";
+import { apiBaseUrl } from '../constants';
+
+import {
+  Patient,
+  PatientFormValues,
+  NewDiagnosisEntry,
+  DiagnosisEntry,
+} from '@patientor/shared/types';
 
 const baseUrl = `${apiBaseUrl}/patients`;
 
@@ -21,8 +26,14 @@ const create = async (object: PatientFormValues) => {
   return data;
 };
 
-const addDiagnosisEntry = async (userId: string, newEntry: NewDiagnosisEntry) => {
-  const { data } = await axios.post<DiagnosisEntry>(`${baseUrl}/${userId}/entries`, newEntry);
+const addDiagnosisEntry = async (
+  userId: string,
+  newEntry: NewDiagnosisEntry
+) => {
+  const { data } = await axios.post<DiagnosisEntry>(
+    `${baseUrl}/${userId}/entries`,
+    newEntry
+  );
   return data;
 };
 

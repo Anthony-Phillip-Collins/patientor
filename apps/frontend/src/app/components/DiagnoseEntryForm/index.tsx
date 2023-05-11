@@ -18,16 +18,17 @@ import {
   useState,
 } from 'react';
 import { AppContext, AppContextValue } from '../../App';
+import HealthCheckFields from './HealthCheckFields';
+import HospitalFields from './HospitalFields';
+import OccupationalHealthcareFields from './OccupationalHealthcareFields';
 import {
   Diagnosis,
   HospitalEntry,
   NewDiagnosisEntry,
   NewDiagnosisEntryBase,
-} from '../../types/Diagnosis';
-import assertNever from '../../types/utils/assertNever';
-import HealthCheckFields from './HealthCheckFields';
-import HospitalFields from './HospitalFields';
-import OccupationalHealthcareFields from './OccupationalHealthcareFields';
+  assertNever,
+} from '@patientor/shared/types';
+
 import styles from './styles.module.css';
 
 export interface Props {

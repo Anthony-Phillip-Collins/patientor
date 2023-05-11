@@ -1,7 +1,9 @@
 import { Router, Request, Response } from 'express';
 import patientService from '../services/patientService';
-import { parseNewDiagnosisEntry } from '../types/utils/parsers/diagnosis';
-import { parseNewPatient } from '../types/utils/parsers/patient';
+import {
+  parseNewDiagnosisEntry,
+  parseNewPatient,
+} from '@patientor/shared/types';
 
 export const patientsRouter = Router();
 
