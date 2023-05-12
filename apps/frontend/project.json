@@ -87,6 +87,10 @@
           "codeCoverage": true
         }
       }
+    },
+    "deploy": {
+      "dependsOn": ["build"],
+      "command": "fly deploy"
     }
   },
   "tags": []
