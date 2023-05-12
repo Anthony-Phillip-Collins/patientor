@@ -10,7 +10,7 @@
     "lint": "npx nx run-many --target=lint --all=true",
     "test": "npx nx run-many --target=test --all=true",
     "e2e": "npx nx run-many --target=e2e --projects=api-e2e,frontend-e2e",
-    "docker:build": "npm run build && docker build -f Dockerfile . -t patientor",
+    "docker:build": "docker build -f Dockerfile . -t patientor",
     "docker:run": "docker run -p 3333:3333 -t patientor",
     "act": "act push -e event.json -W .github/workflows/pipeline.yml"
   },

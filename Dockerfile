@@ -9,35 +9,32 @@ LABEL fly_launch_runtime="NodeJS"
 # NodeJS app lives here
 WORKDIR /app
 
-# Set production environment
-ENV NODE_ENV=production
 ENV HOST=0.0.0.0
 ENV PORT=3333
-
-
-# Throw-away build stage to reduce size of final image
-FROM base as build
 
 # Install packages needed to build node modules
 RUN apt-get update -qq && \
     apt-get install -y python-is-python3 pkg-config build-essential 
 
+
 # Install node modules
-COPY --link package.json package-lock.json .
-RUN npm install --production=false
-
-# Copy application code
-COPY --link . .
-
-# Remove development dependencies
-RUN npm prune --production
+COPY ./package.json ./package-lock.json ./npm.* ./
+RUN npm ci
 
 
-# Final stage for app image
-FROM base
+FROM base as build
+
+COPY . .
+
+ENV NODE_ENV=production
+
+# Build the application
+RUN npx nx run-many -t=build -p=api,frontend
+
+FROM build as deploy
 
 # Copy built application
 COPY --from=build /app /app
 
-# Start the server by default, this can be overwritten at runtime
+# Start the server
 CMD [ "node", "dist/apps/api/main.js" ]
