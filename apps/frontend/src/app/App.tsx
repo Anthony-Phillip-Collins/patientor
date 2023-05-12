@@ -62,16 +62,6 @@ const App = () => {
                 Patientor
               </Typography>
 
-              <Typography
-                variant="h3"
-                component="h1"
-                style={{
-                  marginBottom: '0.5em',
-                }}
-              >
-                Bro
-              </Typography>
-
               <Divider hidden />
               <Routes>
                 <Route path="/" element={<PatientListPage />} />
