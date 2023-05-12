@@ -28,9 +28,9 @@ jobs:
         if: ${{ !github.event.act }}
         uses: cypress-io/github-action@v5
         with:
-          command: npm run test:e2e
-          start: npm run start-prod
-          wait-on: 'http://localhost:5000'
+          command: npm run e2e
+          start: npm run serve
+          wait-on: 'http://localhost:3333'
           browser: chrome
       - name: build
         run: npm run build
