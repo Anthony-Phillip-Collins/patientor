@@ -4,6 +4,7 @@
   "license": "MIT",
   "scripts": {
     "build": "npx nx run-many -t=build -p=api,frontend",
+    "dev": "npx nx run-many -t=serve -p=api,frontend --parallel=true",
     "serve": "npx nx serve api",
     "deploy": "npm run build && fly deploy",
     "lint": "npx nx run-many --target=lint --all=true",

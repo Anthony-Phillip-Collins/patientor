@@ -27,8 +27,6 @@ const App = () => {
   const [diagnoses, setDiagnoses] = useState<Diagnosis[]>([]);
 
   useEffect(() => {
-    void axios.get<void>(`${apiBaseUrl}/ping`);
-
     const fetchPatientList = async () => {
       try {
         const p = await patientService.getAll();
@@ -65,6 +63,16 @@ const App = () => {
                 }}
               >
                 Patientor
+              </Typography>
+
+              <Typography
+                variant="h3"
+                component="h1"
+                style={{
+                  marginBottom: '0.5em',
+                }}
+              >
+                Bro
               </Typography>
 
               <Divider hidden />

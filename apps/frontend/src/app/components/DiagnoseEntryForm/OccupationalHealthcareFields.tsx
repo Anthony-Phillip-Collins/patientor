@@ -26,7 +26,7 @@ const OccupationalHealthcareFields = ({
 
   useEffect(() => {
     setSickLeave(sickLeaveStartDate, sickLeaveEndDate);
-  }, [sickLeaveStartDate, sickLeaveEndDate]);
+  }, [setSickLeave, sickLeaveStartDate, sickLeaveEndDate]);
 
   useEffect(() => {
     if (sickLeave) {
@@ -37,7 +37,13 @@ const OccupationalHealthcareFields = ({
         setSickLeaveEndDate(sickLeave.endDate);
       }
     }
-  }, [sickLeave]);
+  }, [
+    setSickLeaveStartDate,
+    setSickLeaveEndDate,
+    sickLeave,
+    sickLeaveStartDate,
+    sickLeaveEndDate,
+  ]);
 
   return (
     <>
