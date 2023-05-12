@@ -5,12 +5,13 @@
   "scripts": {
     "build": "npx nx run-many -t=build -p=api,frontend",
     "dev": "npx nx run-many -t=serve -p=api,frontend --parallel=true",
-    "serve": "npx nx serve api",
+    "serve": "npm run build && npx nx serve api",
     "deploy": "npm run build && fly deploy",
     "lint": "npx nx run-many --target=lint --all=true",
     "test": "npx nx run-many --target=test --all=true",
     "docker:build": "npm run build && docker build -f Dockerfile . -t patientor",
-    "docker:run": "docker run -p 3333:3333 -t patientor"
+    "docker:run": "docker run -p 3333:3333 -t patientor",
+    "act": "act push -e event.json -W .github/workflows/pipeline.yml"
   },
   "private": true,
   "dependencies": {

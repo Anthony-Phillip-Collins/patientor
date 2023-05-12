@@ -1,13 +1,15 @@
-import { getGreeting } from '../support/app.po';
+import { getTitle } from '../support/app.po';
 
 describe('frontend', () => {
   beforeEach(() => cy.visit('/'));
 
-  it('should display welcome message', () => {
-    // Custom command example, see `../support/commands.ts` file
-    cy.login('my-email@something.com', 'myPassword');
+  it('Homepage display "Patientor" as the title', () => {
+    getTitle().contains('Patientor');
+  });
 
-    // Function helper example, see `../support/app.po.ts` file
-    getGreeting().contains('Welcome frontend');
+  // it should open modal on click of add patient button
+  it('should open modal on click of add patient button', () => {
+    cy.get('button').contains('Add New Patient').click();
+    cy.get('h2').contains('Add a new patient');
   });
 });

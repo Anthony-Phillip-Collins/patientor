@@ -21,7 +21,16 @@ jobs:
         run: npm ci
       - name: Run Eslint
         run: npm run lint
-      - name: build
-        run: npm run build
       - name: Run Jest
         run: npm run test
+      - name: Run Cypress
+        # skip when running locally, because cypress throws errors when using act
+        if: ${{ !github.event.act }}
+        uses: cypress-io/github-action@v5
+        with:
+          command: npm run test:e2e
+          start: npm run start-prod
+          wait-on: 'http://localhost:5000'
+          browser: chrome
+      - name: build
+        run: npm run build
