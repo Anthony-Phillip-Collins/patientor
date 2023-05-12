@@ -1,18 +1,15 @@
 import { Container, Divider, Typography } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import axios from 'axios';
 import 'dayjs/locale/en-gb';
 import { createContext, useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 
-import { apiBaseUrl } from './constants';
-
+import { Diagnosis, Patient } from '@patientor/shared/types';
 import PatientListPage from './pages/PatientListPage';
 import PatientPage from './pages/PatientPage';
 import diagnosisService from './services/diagnosisService';
 import patientService from './services/patientServices';
-import { Diagnosis, Patient } from '@patientor/shared/types';
 
 export interface AppContextValue {
   patients: Patient[];
