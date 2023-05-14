@@ -15,6 +15,10 @@ app.get('/api', (req, res) => {
   res.send({ message: 'Welcome to api!' });
 });
 
+app.get('/health', (req, res) => {
+  res.send('ok');
+});
+
 app.use('/api/diagnoses', diagnosesRouter);
 app.use('/api/patients', patientsRouter);
 

@@ -14,7 +14,7 @@ ENV PORT=3333
 
 # Install packages needed to build node modules
 RUN apt-get update -qq && \
-    apt-get install -y python-is-python3 pkg-config build-essential 
+    apt-get install -y python-is-python3 pkg-config build-essential curl
 
 
 # Install node modules
