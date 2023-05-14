@@ -11,23 +11,17 @@ import {
   TextField,
 } from '@mui/material';
 import {
-  forwardRef,
-  useContext,
-  useEffect,
-  useImperativeHandle,
-  useState,
-} from 'react';
-import { AppContext, AppContextValue } from '../../App';
-import HealthCheckFields from './HealthCheckFields';
-import HospitalFields from './HospitalFields';
-import OccupationalHealthcareFields from './OccupationalHealthcareFields';
-import {
   Diagnosis,
   HospitalEntry,
   NewDiagnosisEntry,
   NewDiagnosisEntryBase,
   assertNever,
 } from '@patientor/shared/types';
+import { forwardRef, useCallback, useContext, useImperativeHandle, useState } from 'react';
+import { AppContext, AppContextValue } from '../../App';
+import HealthCheckFields from './HealthCheckFields';
+import HospitalFields from './HospitalFields';
+import OccupationalHealthcareFields from './OccupationalHealthcareFields';
 
 import styles from './styles.module.css';
 
@@ -54,7 +48,7 @@ const DiagnoseEntryForm = forwardRef<Ref, Props>((props, ref) => {
     { type: 'OccupationalHealthcare', label: 'Occupational Healthcare' },
   ];
 
-  const getInitialData = (): NewDiagnosisEntry => {
+  const getInitialData = useCallback((): NewDiagnosisEntry => {
     const newEntryBase: NewDiagnosisEntryBase = {
       date: '',
       description: '',
@@ -87,20 +81,18 @@ const DiagnoseEntryForm = forwardRef<Ref, Props>((props, ref) => {
       default:
         return assertNever(type);
     }
-  };
+  }, [type]);
 
   const [data, setData] = useState<NewDiagnosisEntry>(getInitialData());
 
-  const reset = () => {
+  const reset = useCallback(() => {
     setValidate(false);
     setData({ ...getInitialData() });
-  };
+  }, [getInitialData]);
 
-  useImperativeHandle(ref, () => ({ reset }), []);
+  useImperativeHandle(ref, () => ({ reset }), [reset]);
 
-  const onDiagnosisCodeChange = (
-    event: SelectChangeEvent<Diagnosis['code'][]>
-  ) => {
+  const onDiagnosisCodeChange = (event: SelectChangeEvent<Diagnosis['code'][]>) => {
     const {
       target: { value },
     } = event;
@@ -116,31 +108,26 @@ const DiagnoseEntryForm = forwardRef<Ref, Props>((props, ref) => {
     onSubmit(data);
   };
 
-  useEffect(() => {
-    reset();
-  }, [type]);
-
   return (
     <div>
       {errorMessage && errorMessage !== '' && (
-        <Alert severity="error">
+        <Alert severity='error'>
           <AlertTitle>Error</AlertTitle>
           {errorMessage}
         </Alert>
       )}
 
       <form className={styles?.form} onSubmit={handleSubmit}>
-        <FormControl variant="standard" sx={{ mb: 3 }} fullWidth>
-          <InputLabel id="diagnosis-type">Diagnosis Type</InputLabel>
+        <FormControl variant='standard' sx={{ mb: 3 }} fullWidth>
+          <InputLabel id='diagnosis-type'>Diagnosis Type</InputLabel>
           <Select
-            labelId="diagnosis-type"
-            label="Diagnosis Type"
-            id="diagnosis-type-select"
+            labelId='diagnosis-type'
+            label='Diagnosis Type'
+            id='diagnosis-type-select'
             onChange={(e) => {
-              const item = diagnosisTypes.find(
-                ({ type }) => type.toString() === e.target.value
-              );
+              const item = diagnosisTypes.find(({ type }) => type.toString() === e.target.value);
               if (item?.type) {
+                reset();
                 setType(item.type);
               }
             }}
@@ -155,9 +142,9 @@ const DiagnoseEntryForm = forwardRef<Ref, Props>((props, ref) => {
         </FormControl>
 
         <TextField
-          id="description"
-          label="Description"
-          variant="standard"
+          id='description'
+          label='Description'
+          variant='standard'
           sx={{ mb: 3 }}
           InputLabelProps={{ required: true }}
           onChange={(e) => setData({ ...data, description: e.target.value })}
@@ -166,9 +153,9 @@ const DiagnoseEntryForm = forwardRef<Ref, Props>((props, ref) => {
         />
 
         <TextField
-          id="specialist"
-          label="Specialist"
-          variant="standard"
+          id='specialist'
+          label='Specialist'
+          variant='standard'
           sx={{ mb: 3 }}
           InputLabelProps={{ required: true }}
           onChange={(e) => setData({ ...data, specialist: e.target.value })}
@@ -177,25 +164,25 @@ const DiagnoseEntryForm = forwardRef<Ref, Props>((props, ref) => {
         />
 
         <TextField
-          id="date"
-          label="Date"
-          variant="standard"
+          id='date'
+          label='Date'
+          variant='standard'
           sx={{ mb: 3 }}
-          type="date"
+          type='date'
           InputLabelProps={{ shrink: true, required: true }}
           onChange={(e) => setData({ ...data, date: e.target.value })}
           value={data.date}
           error={validate && data.date === ''}
         />
 
-        <FormControl variant="standard" sx={{ mb: 3 }}>
-          <InputLabel id="diagnosis-codes">Diagnosis codes</InputLabel>
+        <FormControl variant='standard' sx={{ mb: 3 }}>
+          <InputLabel id='diagnosis-codes'>Diagnosis codes</InputLabel>
           <Select
-            labelId="diagnosis-codes"
-            id="diagnosis-codes-select"
+            labelId='diagnosis-codes'
+            id='diagnosis-codes-select'
             onChange={onDiagnosisCodeChange}
             value={data.diagnosisCodes}
-            label="Diagnosis codes"
+            label='Diagnosis codes'
             multiple
           >
             {availableDiagnoses?.map((name) => (
@@ -246,24 +233,14 @@ const DiagnoseEntryForm = forwardRef<Ref, Props>((props, ref) => {
           />
         )}
 
-        <Grid
-          container
-          direction="row"
-          justifyContent="space-between"
-          alignItems="center"
-          mt={5}
-        >
+        <Grid container direction='row' justifyContent='space-between' alignItems='center' mt={5}>
           <Grid item>
-            <Button
-              variant="contained"
-              color="error"
-              onClick={() => onCancel()}
-            >
+            <Button variant='contained' color='error' onClick={() => onCancel()}>
               Cancel
             </Button>
           </Grid>
           <Grid item>
-            <Button variant="contained" type="submit">
+            <Button variant='contained' type='submit'>
               Add
             </Button>
           </Grid>
